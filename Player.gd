@@ -6,6 +6,9 @@ const JUMPHEIGHT = -550
 
 var motion = Vector2()
 
+func _ready():
+	add_to_group("Player")
+
 func _physics_process(delta):
 	motion.y += GRAVITY
 	
@@ -39,7 +42,7 @@ func _physics_process(delta):
 func _on_PlayerBody_body_entered(body):
 	if body.is_in_group("enemies"):
 		get_tree().change_scene("res://World.tscn")
+	elif body.is_in_group("portal"):
+		get_tree().change_scene("res://Win Screen.tscn")
 	else:
 		pass
-	
-	

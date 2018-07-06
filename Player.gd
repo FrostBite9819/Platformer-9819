@@ -1,7 +1,7 @@
 extends KinematicBody2D
 const UP = Vector2(0,-1)
 const GRAVITY = 20
-const SPEED = 300
+const SPEED = 500
 const JUMPHEIGHT = -550
 
 var motion = Vector2()
@@ -31,10 +31,15 @@ func _physics_process(delta):
 	else:
 		$Sprite.play("Jump")
 	motion = move_and_slide(motion, UP)
-	
+	if Input.is_action_pressed("ui_down"):
+		motion.y += GRAVITY * 1.5
+		$Sprite.play("Slide")
+		
+
 func _on_PlayerBody_body_entered(body):
 	if body.is_in_group("enemies"):
-		hide()
+		get_tree().change_scene("res://World.tscn")
 	else:
 		pass
+	
 	
